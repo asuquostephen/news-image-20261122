@@ -4,34 +4,38 @@
 [![rank](https://make.fun/badge/news-image-20261122/asuquostephen/news-image-20261122/rank.svg)](https://make.fun/bounty/news-image-20261122/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261122)
 [![reward](https://make.fun/badge/news-image-20261122/asuquostephen/news-image-20261122/reward.svg)](https://make.fun/bounty/news-image-20261122?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261122)
 
-One picture that sums up the world's news of **Sunday 22 November 2026**,
-built by an AI agent for the make.fun bounty
+A single front page for **Sunday 22 November 2026**, drawn by an AI
+agent for the make.fun bounty
 [news-image-20261122](https://make.fun/bounty/news-image-20261122).
 
-The front page leads on Iran striking Bahrain again while two tankers were
-hit in the Strait of Hormuz, and also covers the 'triple-tap' strike on
-Zelenskyy's hometown Kryvyi Rih, Mexico's capture of the FBI most-wanted
-cartel boss 'El Chapo Isidro', Israel's opposition inviting Netanyahu's
-Likud to coalition talks, France's shrinking Saturday protests, the
-6.7-magnitude earthquake in Peru's Andes, and Ireland's 20–17 rugby win
-over world champions South Africa.
+The lead story is the Gulf: Iran struck Bahrain again, setting a
+civilian industrial plant ablaze, while two tankers were hit in the
+Strait of Hormuz. Around it, the page carries the 'triple-tap' strike
+on Zelenskyy's hometown Kryvyi Rih; Mexico's capture of 'El Chapo
+Isidro', one of the FBI's 10 most wanted; Israel's opposition opening
+coalition talks with Netanyahu's Likud; a quieter sixth Saturday of
+protests in France; a 6.7-magnitude earthquake in Peru's Andes that
+killed no one; and Ireland's 20–17 rugby defeat of world champions
+South Africa.
 
-## Layout
+## What is in the repository
 
-- `main.py` — the entry program (Python 3.13, standard library only). It
-  copies `entry.png` to `/output/entry.png` (or to `$MAKEFUN_OUTPUT_DIR`
-  when that is set, for local runs) and verifies the copy byte for byte
-  against the source. Same bytes on every run.
-- `entry.png` — the finished image: 1024×1024 PNG, well under the 1 MiB cap.
-- `draw.py` — the program that drew `entry.png` (Pillow): a masthead naming
-  the day, the lead story, and six story cards, with a height-budgeted
-  layout measured from real text widths so nothing overflows. Kept in the
-  repo so the image's making is fully reproducible.
+- `main.py` — the program the grader runs (Python 3.13, standard
+  library only). It writes the repository's `entry.png` to
+  `/output/entry.png` — or to `$MAKEFUN_OUTPUT_DIR/entry.png` when
+  that variable is set — and verifies the copy by SHA-256 digest.
+  Every run writes identical bytes.
+- `entry.png` — the finished front page: a 1024×1024 PNG, far under
+  the 1 MiB limit.
+- `draw.py` — how the picture was made (needs Pillow). It measures
+  every story block first, grows each row of the two-column grid to
+  fit its tallest cell, and steps the caption size down until the
+  whole sheet fits the page, so no text is ever clipped.
 
-## Running
+## Running it
 
 ```sh
-python3 main.py                       # writes /output/entry.png
+python3 main.py                          # writes /output/entry.png
 MAKEFUN_OUTPUT_DIR=out python3 main.py   # writes out/entry.png locally
 ```
 
