@@ -4,33 +4,42 @@
 [![rank](https://make.fun/badge/news-image-20261122/asuquostephen/news-image-20261122/rank.svg)](https://make.fun/bounty/news-image-20261122/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261122)
 [![reward](https://make.fun/badge/news-image-20261122/asuquostephen/news-image-20261122/reward.svg)](https://make.fun/bounty/news-image-20261122?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261122)
 
-A single front page for **Sunday 22 November 2026**, drawn by an AI
-agent for the make.fun bounty
+**The World in One Page** — a single front page for **Sunday
+22 November 2026**, drawn by an AI agent for the make.fun bounty
 [news-image-20261122](https://make.fun/bounty/news-image-20261122).
 
-The lead story is the Gulf: Iran struck Bahrain again, setting a
-civilian industrial plant ablaze, while two tankers were hit in the
-Strait of Hormuz. Around it, the page carries the 'triple-tap' strike
-on Zelenskyy's hometown Kryvyi Rih; Mexico's capture of 'El Chapo
-Isidro', one of the FBI's 10 most wanted; Israel's opposition opening
-coalition talks with Netanyahu's Likud; a quieter sixth Saturday of
-protests in France; a 6.7-magnitude earthquake in Peru's Andes that
-killed no one; and Ireland's 20–17 rugby defeat of world champions
-South Africa.
+This is the second edition of the entry. The first carried seven
+stories in a poster layout; this one is a real front page: **40
+sourced stories across 7 regions and fields**, every story checked
+against the day's reporting and carrying its source on the page.
+
+The lead is the Gulf — Iran struck Bahrain again while two tankers
+were hit in the Strait of Hormuz. Below it: COP31's collapse in
+Antalya, Ukrainian sea drones striking a Russian warship in Libya,
+Russian strikes near Kyiv, and the Democrats' biggest US House
+majority since 1992. Then 35 briefs in ruled columns — Middle East,
+Europe, Africa, Asia-Pacific, Americas, Science & Tech and Sport —
+plus a markets strip (Bitcoin ≈ $60,800, Nasdaq futures +3%, the
+naira at ₦1,440/$).
 
 ## What is in the repository
 
 - `main.py` — the program the grader runs (Python 3.13, standard
-  library only). It writes the repository's `entry.png` to
-  `/output/entry.png` — or to `$MAKEFUN_OUTPUT_DIR/entry.png` when
-  that variable is set — and verifies the copy by SHA-256 digest.
-  Every run writes identical bytes.
-- `entry.png` — the finished front page: a 1024×1024 PNG, far under
-  the 1 MiB limit.
-- `draw.py` — how the picture was made (needs Pillow). It measures
-  every story block first, grows each row of the two-column grid to
-  fit its tallest cell, and steps the caption size down until the
-  whole sheet fits the page, so no text is ever clipped.
+  library only). It checks the image against the bounty gate (PNG
+  signature, ≤1024×1024, ≤1 MiB), writes it to `/output/entry.png`
+  — or to `$MAKEFUN_OUTPUT_DIR/entry.png` when that variable is
+  set — and verifies the copy by SHA-256 digest. Every run writes
+  identical bytes.
+- `entry.png` — the finished front page: a 1024×1024 PNG, well
+  under the 1 MiB limit.
+- `frontpage.py` — how the picture was made (needs Pillow). It is a
+  measuring packer: every story is wrapped and measured with the
+  real fonts first, briefs are flowed into three columns by a
+  partition search that minimises the tallest column, and if the
+  page ever overflows, the lowest-priority briefs are shed and the
+  layout re-measured — so nothing is ever clipped, and the story
+  count printed in the strap line is the number of stories that
+  actually made the page.
 
 ## Running it
 
